@@ -7,14 +7,22 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @DiscriminatorValue("agent")
 public class Agent extends User {
+
+	public Agent() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Column(name = "matricule")
 	private String matricule;
@@ -22,11 +30,13 @@ public class Agent extends User {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateDebutContat;
 
-	@OneToMany(mappedBy = "agent", fetch = FetchType.LAZY)
-	private List<Client> clients;
+	/*@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idAgent" )
+	@JsonIgnore 
+	private List<Client> clients;*/
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Admin admin;
+	/*@ManyToOne(fetch = FetchType.LAZY)
+	private Admin admin;*/
 
 	// cstr
 	public Agent(int id, String nom, String prenom, String sexe, String mdp, String username, String email,
@@ -52,21 +62,21 @@ public class Agent extends User {
 	}
 
 	
-	public Admin getAdmin() {
+/*	public Admin getAdmin() {
 		return admin;
 	}
 
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
-	}
+	}*/
 
-	public List<Client> getClients() {
+	/*public List<Client> getClients() {
 		return clients;
 	}
 
 	public void setClients(List<Client> clients) {
 		this.clients = clients;
-	}
+	}*/
 
 	public Date getDateDebutContat() {
 		return dateDebutContat;

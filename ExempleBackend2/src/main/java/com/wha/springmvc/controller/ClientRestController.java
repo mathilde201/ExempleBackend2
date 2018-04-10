@@ -58,7 +58,7 @@ public class ClientRestController {
 
  	//-------------------------------validateRequest ------------------------------------------------
 
-@RequestMapping(value = "/agent/{idAgent}/validation/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+/*@RequestMapping(value = "/agent/{idAgent}/validation/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 public ResponseEntity<Demande> getDemande(@PathVariable("id") long id) {
     System.out.println("Fetching Demande with id " + id);
     Demande demande = DemandeService.findById(id);
@@ -70,7 +70,7 @@ public ResponseEntity<Demande> getDemande(@PathVariable("id") long id) {
     
    
     return new ResponseEntity<Demande>(demande, HttpStatus.OK);
-}
+}*/
 
 
 //-------------------Create a client--------------------------------------------------------

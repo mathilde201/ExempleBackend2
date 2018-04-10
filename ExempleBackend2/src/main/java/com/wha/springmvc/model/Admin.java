@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -15,11 +16,12 @@ public class Admin extends User {
 	@Column(name = "matricule")
 	private String matricule;
 
-	@OneToMany(mappedBy = "admin", fetch = FetchType.LAZY)
+	@OneToMany
 	private List<DemandeOuvertureCompte> ouverturecomptes;
 
-	@OneToMany(mappedBy = "admin", fetch = FetchType.LAZY)
-	private List<Agent> agents;
+	/*@OneToMany
+	@JoinColumn(name = "idAdmin")
+	private List<Agent> agents;*/
 
 	// cstr
 	public Admin(int id, String nom, String prenom, String sexe, String mdp, String username, String email,
@@ -50,13 +52,13 @@ public class Admin extends User {
 		this.ouverturecomptes = ouverturecomptes;
 	}
 
-	public List<Agent> getAgents() {
+	/*public List<Agent> getAgents() {
 		return agents;
 	}
 
 	public void setAgents(List<Agent> agents) {
 		this.agents = agents;
-	}
+	}*/
 
 	
 

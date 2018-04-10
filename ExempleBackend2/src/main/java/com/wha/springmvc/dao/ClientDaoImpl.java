@@ -1,15 +1,18 @@
 package com.wha.springmvc.dao;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.NoResultException;
 
+import org.springframework.stereotype.Repository;
+
 import com.wha.springmvc.model.Client;
 import com.wha.springmvc.model.User;
 
-
+@Repository("clientDao")
 public class ClientDaoImpl extends AbstractDAO<Integer, Client> implements ClientDAO{
 
 	@Override
@@ -49,12 +52,23 @@ public class ClientDaoImpl extends AbstractDAO<Integer, Client> implements Clien
 	@Override
 	public List<Client> findAllClients() {
 		// TODO Auto-generated method stub
-		return getEntityManager().createQuery("SELECT c FROM Client c ORDER BY c.username ASC").getResultList();
+		return getEntityManager().createQuery("SELECT c FROM Client as c ORDER BY c.username ASC").getResultList();
 	}
 
 	@Override
 	public void deleteAllClients() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Client> findAllAttachedClients(int idAg) {
+		List<Client> clients = new ArrayList<Client>();
+		clients =  getEntityManager().createQuery("SELECT c FROM Client as c where c.agent.id = :idagent")
+		.setParameter("idagent", idAg)
+		.getResultList();
+		return clients;
 		
 	}
 }

@@ -9,9 +9,18 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Proxy;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @DiscriminatorValue("client")
 public class Client extends User {
+
+	public Client() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Column(name = "nbEnfant")
 	private int nbEnfant;
@@ -19,10 +28,11 @@ public class Client extends User {
 	@Column(name = "matrimonial")
 	private String matrimonial;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Agent agent;
+	//@ManyToOne(fetch = FetchType.LAZY)
+	//private Agent agent;
 
-	@OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+	@OneToMany
+	@JsonIgnore 
 	private List<CompteBanquaire> comptes;
 
 	// cstr
@@ -60,14 +70,14 @@ public class Client extends User {
 		this.matrimonial = matrimonial;
 	}
 
-	public Agent getAgent() {
+	/*public Agent getAgent() {
 		return agent;
 	}
 	
 
 	public void setAgent(Agent agent) {
 		this.agent = agent;
-	}
+	}*/
 
 	public List<CompteBanquaire> getComptes() {
 		return comptes;

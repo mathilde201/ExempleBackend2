@@ -14,7 +14,7 @@ public class ClientServiceImpl implements ClientService {
 
 	
 	@Autowired
-	private ClientDAO dao;
+	private ClientDAO clientDao;
 
 	@Override
 	public Client findById(long id) {
