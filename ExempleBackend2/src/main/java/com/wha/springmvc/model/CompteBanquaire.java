@@ -54,9 +54,9 @@ public class CompteBanquaire {
 	 * @OneToMany(mappedBy = "compteBanquaire", fetch = FetchType.LAZY) private
 	 * double solde;
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
+	/*@ManyToOne(fetch = FetchType.LAZY)
 
-	private Client client;
+	private Client client;*/
 
 	@Column(name = "rib")
 	private String rib;
@@ -85,13 +85,13 @@ public class CompteBanquaire {
 		return dateCreation;
 	}
 
-	public Client getClient() {
+	/*public Client getClient() {
 		return client;
 	}
 
 	public void setClient(Client client) {
 		this.client = client;
-	}
+	}*/
 
 	public void setDateCreation(Date dateCreation) {
 		this.dateCreation = dateCreation;

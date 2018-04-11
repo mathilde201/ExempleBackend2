@@ -2,6 +2,7 @@ package com.wha.springmvc.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -27,6 +28,9 @@ public class Client extends User {
 
 	@Column(name = "matrimonial")
 	private String matrimonial;
+	
+	@Column (name="cb")
+	private String Comptebanquaire;
 
 	//@ManyToOne(fetch = FetchType.LAZY)
 	//private Agent agent;
@@ -51,6 +55,14 @@ public class Client extends User {
 		this.nbEnfant = nbEnfant;
 		this.matrimonial = matrimonial;
 		this.comptes = comptes;
+	}
+
+	public String getCompteBanquaire() {
+		return Comptebanquaire;
+	}
+
+	public void setCompteBanquaire(String compteBanquaire) {
+		Comptebanquaire = compteBanquaire;
 	}
 
 	// getset

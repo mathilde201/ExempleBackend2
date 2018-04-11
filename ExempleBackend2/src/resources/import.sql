@@ -1,0 +1,6 @@
+INSERT INTO `user` (`TYPE_USER`, `id`, `email`, `mdp`, `nom`, `numTel`, `prenom`, `sexe`, `username`, `dateDebutContat`, `matricule`, `matrimonial`, `nbEnfant`) VALUES ('admin', '1', 'admin@ban.fr', 'mdp', 'Browning', '1234567890', 'Emily', 'f', 'BabyDoll', '2017-08-07 00:00:00', 'ADM001', NULL, 0);
+INSERT INTO `user` (`TYPE_USER`, `id`, `email`, `mdp`, `nom`, `numTel`, `prenom`, `sexe`, `username`, `dateDebutContat`, `matricule`, `matrimonial`, `nbEnfant`) VALUES ('agent', '2', 'agent@bam.fr', 'mdp', 'Depp', '2345678901', 'Johnny', 'm', 'JackSparrow', '2018-02-06 00:00:00', 'AGE001', NULL, 0);
+INSERT INTO `user` (`TYPE_USER`, `id`, `email`, `mdp`, `nom`, `numTel`, `prenom`, `sexe`, `username`, `dateDebutContat`, `matricule`, `matrimonial`, `nbEnfant`) VALUES ('client', '3', 'client@bam.ft', 'mdp', 'Chaplin', '3456789012', 'Charlie', 'm', 'CC', '2018-01-23 00:00:00', NULL, NULL, 0);
+INSERT INTO `user` (`TYPE_USER`, `id`, `email`, `mdp`, `nom`, `numTel`, `prenom`, `sexe`, `username`, `dateDebutContat`, `matricule`, `matrimonial`, `nbEnfant`) VALUES ('client', '4', 'client2@bam.fr', 'mdp', 'Kunis', '4567890123', 'Mila', 'f', 'Lori', '2018-04-16 00:00:00', 'CLIE002', NULL, '2');
+INSERT INTO `user_user` (`user_id`, `users_id`) VALUES ('1', '2'), ('2', '3');
+INSERT INTO `user_user` (`user_id`, `users_id`) VALUES ('2', '4');

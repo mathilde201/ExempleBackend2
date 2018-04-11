@@ -19,7 +19,7 @@ public class ClientServiceImpl implements ClientService {
 	@Override
 	public Client findById(long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return clientDao.findById((int)id);
 	}
 
 	@Override

@@ -34,6 +34,10 @@ public class Agent extends User {
 	@JoinColumn(name = "idAgent" )
 	@JsonIgnore 
 	private List<Client> clients;*/
+	
+	@OneToMany
+	@JsonIgnore 
+	private List<CompteBanquaire> comptes;
 
 	/*@ManyToOne(fetch = FetchType.LAZY)
 	private Admin admin;*/
@@ -77,6 +81,14 @@ public class Agent extends User {
 	public void setClients(List<Client> clients) {
 		this.clients = clients;
 	}*/
+
+	public List<CompteBanquaire> getComptes() {
+		return comptes;
+	}
+
+	public void setComptes(List<CompteBanquaire> comptes) {
+		this.comptes = comptes;
+	}
 
 	public Date getDateDebutContat() {
 		return dateDebutContat;

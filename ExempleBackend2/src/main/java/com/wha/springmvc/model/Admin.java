@@ -2,12 +2,15 @@ package com.wha.springmvc.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @DiscriminatorValue("admin")
@@ -16,12 +19,19 @@ public class Admin extends User {
 	@Column(name = "matricule")
 	private String matricule;
 
-	@OneToMany
+	//@OneToMany
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JsonIgnore
 	private List<DemandeOuvertureCompte> ouverturecomptes;
 
 	/*@OneToMany
 	@JoinColumn(name = "idAdmin")
 	private List<Agent> agents;*/
+	
+	public Admin() {
+		super();
+		
+	}
 
 	// cstr
 	public Admin(int id, String nom, String prenom, String sexe, String mdp, String username, String email,

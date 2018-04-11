@@ -1,5 +1,8 @@
 package com.wha.springmvc.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,6 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.wha.springmvc.model.Agent;
 import com.wha.springmvc.model.Client;
+import com.wha.springmvc.model.CompteBanquaire;
 import com.wha.springmvc.model.Demande;
 import com.wha.springmvc.model.User;
 import com.wha.springmvc.service.ClientService;
@@ -103,6 +107,31 @@ public ResponseEntity<Client> getAgent(@PathVariable("id") long id) {
         return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
     }
     return new ResponseEntity<Client>(client, HttpStatus.OK);
+}
+
+/**
+ * cette permet afficher un client avec ses details
+ * 
+ * @param :client
+ * @return List<account>
+ * @author Mathilde
+ * 
+ */
+@SuppressWarnings("unchecked")
+@RequestMapping(value = "/client/{idclient}/account", method = RequestMethod.GET)
+//cette methode marche avec path /client/{idclient} et non /client/{idclient}/account
+public ResponseEntity<List<CompteBanquaire>> viewDetails(@PathVariable("idClient") int idcl) {
+
+	List<CompteBanquaire> comptes = new ArrayList<CompteBanquaire>();
+	Client cli = clientService.findById(idcl);
+	if (cli == null) {
+		return new ResponseEntity<List<CompteBanquaire>>(HttpStatus.NO_CONTENT);
+	} else {
+		comptes = (List<CompteBanquaire>) (Object) cli.getComptes();
+	}
+	
+	return new ResponseEntity<List<CompteBanquaire>>(comptes, HttpStatus.OK);
+
 }
 
 
