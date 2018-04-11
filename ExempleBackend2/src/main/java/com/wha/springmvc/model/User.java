@@ -46,13 +46,13 @@ public class User {
 
 	@Column(name = "prenom")
 	private String prenom;
-
+	
 	@Column(name = "mdp")
 	private String mdp;
-
+	
 	@Column(name = "username")
 	private String username;
-
+	
 	private String email;
 	private String numTel;
 	private String sexe;
