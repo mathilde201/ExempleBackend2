@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @DiscriminatorValue("admin")
 public class Admin extends User {
@@ -17,6 +19,7 @@ public class Admin extends User {
 	private String matricule;
 
 	@OneToMany
+	@JsonIgnore
 	private List<DemandeOuvertureCompte> ouverturecomptes;
 
 	/*@OneToMany
@@ -29,6 +32,8 @@ public class Admin extends User {
 		super(id, nom, prenom, sexe, mdp, username, email, numTel);
 		this.matricule = matricule;
 	}
+	
+	public Admin() {}
 
 	public Admin(String matricule) {
 		super();
