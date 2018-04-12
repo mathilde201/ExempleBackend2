@@ -19,6 +19,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "comptebanquaire")
 /*
@@ -35,7 +37,7 @@ import javax.persistence.TemporalType;
 @DiscriminatorValue("cb")
 public class CompteBanquaire {
 	// Def
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -54,9 +56,11 @@ public class CompteBanquaire {
 	 * @OneToMany(mappedBy = "compteBanquaire", fetch = FetchType.LAZY) private
 	 * double solde;
 	 */
-	/*@ManyToOne(fetch = FetchType.LAZY)
-
-	private Client client;*/
+	/*
+	 * @ManyToOne(fetch = FetchType.LAZY)
+	 * 
+	 * private Client client;
+	 */
 
 	@Column(name = "rib")
 	private String rib;
@@ -68,6 +72,7 @@ public class CompteBanquaire {
 	private double solde;
 
 	@OneToMany(mappedBy = "comptebanquaire", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<Transaction> transactions;
 
 	public CompteBanquaire() {
@@ -85,13 +90,11 @@ public class CompteBanquaire {
 		return dateCreation;
 	}
 
-	/*public Client getClient() {
-		return client;
-	}
-
-	public void setClient(Client client) {
-		this.client = client;
-	}*/
+	/*
+	 * public Client getClient() { return client; }
+	 * 
+	 * public void setClient(Client client) { this.client = client; }
+	 */
 
 	public void setDateCreation(Date dateCreation) {
 		this.dateCreation = dateCreation;

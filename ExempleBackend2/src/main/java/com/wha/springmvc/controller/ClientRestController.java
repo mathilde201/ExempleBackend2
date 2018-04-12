@@ -24,115 +24,87 @@ import com.wha.springmvc.model.User;
 import com.wha.springmvc.service.ClientService;
 import com.wha.springmvc.service.UserService;
 
-
-
 @RestController
 public class ClientRestController {
 
-	
+	@Autowired
+	ClientService clientService;
+	// ------------------- Update a client
+	// --------------------------------------------------------
+	/*
+	 * @RequestMapping(value = "/client/{id}", method = RequestMethod.PUT) public
+	 * ResponseEntity<Client> updateClient(@PathVariable("id") long id, @RequestBody
+	 * Client client) { System.out.println("Updating client " + id);
+	 * 
+	 * 
+	 * Client currentClient = clientService.findById(id);
+	 * 
+	 * if (currentClient==null) { System.out.println("Client with id " + id +
+	 * " not found"); return new ResponseEntity<Client>(HttpStatus.NOT_FOUND); }
+	 * 
+	 * currentClient.setUsername(client.getUsername()); //
+	 * currentClient.setAddress(client.getAddress());
+	 * currentClient.setEmail(client.getEmail());
+	 * 
+	 * clientService.updateClient(currentClient); return new
+	 * ResponseEntity<Client>(HttpStatus.OK); }
+	 */
 
-    @Autowired
-    ClientService clientService;
-	//------------------- Update a client --------------------------------------------------------
-    
-    @RequestMapping(value = "/client/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Client> updateClient(@PathVariable("id") long id, @RequestBody Client client) {
-        System.out.println("Updating client " + id);
-         
-        
-		Client currentClient = clientService.findById(id);
-         
-        if (currentClient==null) {
-            System.out.println("Client with id " + id + " not found");
-            return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
-        }
- 
-        currentClient.setUsername(client.getUsername());
-       // currentClient.setAddress(client.getAddress());
-        currentClient.setEmail(client.getEmail());
-         
-        clientService.updateClient(currentClient);
-        return new ResponseEntity<Client>(HttpStatus.OK);
-    }
- 
-    
+	// -------------------Create a
+	// client--------------------------------------------------------
 
+	/*
+	 * @RequestMapping(value = "/client/", method = RequestMethod.POST) public
+	 * ResponseEntity<Void> createClient(@RequestBody Client client,
+	 * UriComponentsBuilder ucBuilder) { System.out.println("Creating User " +
+	 * client.getUsername());
+	 * 
+	 * if (clientService.isClientExist(client)) {
+	 * System.out.println("A agent with name " + client.getUsername() +
+	 * " already exist"); return new ResponseEntity<Void>(HttpStatus.CONFLICT); }
+	 * 
+	 * clientService.saveClient(client);
+	 * 
+	 * HttpHeaders headers = new HttpHeaders();
+	 * headers.setLocation(ucBuilder.path("/agent/{id}").buildAndExpand(client.getId
+	 * ()).toUri()); return new ResponseEntity<Void>(headers, HttpStatus.CREATED); }
+	 */
 
+	// -------------------Retrieve Single
+	// User--------------------------------------------------------
 
+	/*
+	 * @RequestMapping(value = "/client/{id}", method = RequestMethod.GET, produces
+	 * = MediaType.APPLICATION_JSON_VALUE) public ResponseEntity<Client>
+	 * getAgent(@PathVariable("id") long id) {
+	 * System.out.println("Fetching Agent with id " + id); Client client =
+	 * clientService.findById(id); if (client == null) {
+	 * System.out.println("User with id " + id + " not found"); return new
+	 * ResponseEntity<Client>(HttpStatus.NOT_FOUND); } return new
+	 * ResponseEntity<Client>(client, HttpStatus.OK); }
+	 */
 
- 	//-------------------------------validateRequest ------------------------------------------------
+	/**
+	 * cette methode permet d'afficher un client avec ses details
+	 * 
+	 * @param :idclient
+	 * @return cli
+	 * @author Mathilde
+	 * 
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/client/{idclient}", method = RequestMethod.GET)
 
-/*@RequestMapping(value = "/agent/{idAgent}/validation/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-public ResponseEntity<Demande> getDemande(@PathVariable("id") long id) {
-    System.out.println("Fetching Demande with id " + id);
-    Demande demande = DemandeService.findById(id);
-    if (demande == null) {
-        System.out.println("Demande with id " + id + " not found");
-        return new ResponseEntity<Demande>(HttpStatus.NOT_FOUND);
-    }
-    
-    
-   
-    return new ResponseEntity<Demande>(demande, HttpStatus.OK);
-}*/
+	public ResponseEntity<Client> viewDetails(@PathVariable("idclient") int idcl) {
 
+		Client cli = clientService.findById(idcl);
+		if (cli == null) {
+			// System.out.println("Client with id " + idcl + " not found");
+			return new ResponseEntity<Client>(HttpStatus.NO_CONTENT);
+		}
 
-//-------------------Create a client--------------------------------------------------------
+		return new ResponseEntity<Client>(cli, HttpStatus.OK);
 
-@RequestMapping(value = "/client/", method = RequestMethod.POST)
-public ResponseEntity<Void> createClient(@RequestBody Client client, UriComponentsBuilder ucBuilder) {
-    System.out.println("Creating User " + client.getUsername());
-
-    if (clientService.isClientExist(client)) {
-        System.out.println("A agent with name " + client.getUsername() + " already exist");
-        return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-    }
-
-    clientService.saveClient(client);
-
-    HttpHeaders headers = new HttpHeaders();
-    headers.setLocation(ucBuilder.path("/agent/{id}").buildAndExpand(client.getId()).toUri());
-    return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-}
-
-
-//-------------------Retrieve Single User--------------------------------------------------------
- 
-@RequestMapping(value = "/client/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-public ResponseEntity<Client> getAgent(@PathVariable("id") long id) {
-    System.out.println("Fetching Agent with id " + id);
-    Client client = clientService.findById(id);
-    if (client == null) {
-        System.out.println("User with id " + id + " not found");
-        return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
-    }
-    return new ResponseEntity<Client>(client, HttpStatus.OK);
-}
-
-/**
- * cette permet afficher un client avec ses details
- * 
- * @param :client
- * @return List<account>
- * @author Mathilde
- * 
- */
-@SuppressWarnings("unchecked")
-@RequestMapping(value = "/client/{idclient}/account", method = RequestMethod.GET)
-//cette methode marche avec path /client/{idclient} et non /client/{idclient}/account
-public ResponseEntity<List<CompteBanquaire>> viewDetails(@PathVariable("idClient") int idcl) {
-
-	List<CompteBanquaire> comptes = new ArrayList<CompteBanquaire>();
-	Client cli = clientService.findById(idcl);
-	if (cli == null) {
-		return new ResponseEntity<List<CompteBanquaire>>(HttpStatus.NO_CONTENT);
-	} else {
-		comptes = (List<CompteBanquaire>) (Object) cli.getComptes();
 	}
-	
-	return new ResponseEntity<List<CompteBanquaire>>(comptes, HttpStatus.OK);
-
-}
-
 
 }

@@ -28,15 +28,14 @@ public class Client extends User {
 
 	@Column(name = "matrimonial")
 	private String matrimonial;
-	
-	@Column (name="cb")
-	private String Comptebanquaire;
 
-	//@ManyToOne(fetch = FetchType.LAZY)
-	//private Agent agent;
+	// @ManyToOne(fetch = FetchType.LAZY)
+	// private Agent agent;
 
-	@OneToMany
-	@JsonIgnore 
+	@OneToMany(fetch = FetchType.EAGER)
+	private List<Demande> demandes;
+
+	@OneToMany(fetch = FetchType.EAGER)
 	private List<CompteBanquaire> comptes;
 
 	// cstr
@@ -57,12 +56,12 @@ public class Client extends User {
 		this.comptes = comptes;
 	}
 
-	public String getCompteBanquaire() {
-		return Comptebanquaire;
+	public List<Demande> getDemandes() {
+		return demandes;
 	}
 
-	public void setCompteBanquaire(String compteBanquaire) {
-		Comptebanquaire = compteBanquaire;
+	public void setDemandes(List<Demande> demandes) {
+		this.demandes = demandes;
 	}
 
 	// getset
@@ -82,14 +81,12 @@ public class Client extends User {
 		this.matrimonial = matrimonial;
 	}
 
-	/*public Agent getAgent() {
-		return agent;
-	}
-	
-
-	public void setAgent(Agent agent) {
-		this.agent = agent;
-	}*/
+	/*
+	 * public Agent getAgent() { return agent; }
+	 * 
+	 * 
+	 * public void setAgent(Agent agent) { this.agent = agent; }
+	 */
 
 	public List<CompteBanquaire> getComptes() {
 		return comptes;

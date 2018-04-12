@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 
 // AAD = "avec autorisation de découvert"
 @Entity
-@DiscriminatorValue("comptebancaire")
+@DiscriminatorValue("comptecourantaad")
 public class CompteCourantAAD extends CompteBanquaire
 
 {

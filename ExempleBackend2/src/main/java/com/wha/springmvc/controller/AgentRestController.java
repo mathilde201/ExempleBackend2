@@ -88,27 +88,7 @@ public class AgentRestController {
    
     }*/
 	
-//------------------- Update a client --------------------------------------------------------
-    
-    @RequestMapping(value = "/agent/{idagent}/{idclient}", method = RequestMethod.PUT)
-    public ResponseEntity<Client> updateClient(@PathVariable("id") long id, @RequestBody Client client) {
-        System.out.println("Updating client " + id);
-         
-        
-		Client currentClient = clientService.findById(id);
-         
-        if (currentClient==null) {
-            System.out.println("Client with id " + id + " not found");
-            return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
-        }
- 
-        currentClient.setUsername(client.getUsername());
-       // currentClient.setAddress(client.getAddress());
-        currentClient.setEmail(client.getEmail());
-         
-        clientService.updateClient(currentClient);
-        return new ResponseEntity<Client>(HttpStatus.OK);
-    }
+
  
 }
     

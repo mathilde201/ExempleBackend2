@@ -26,14 +26,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @DiscriminatorColumn(name = "TYPE_DEMANDE")
 
 public class Demande {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
-	/*@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnore
-	private User user;*/
+
+	/*
+	 * @ManyToOne(fetch = FetchType.LAZY)
+	 * 
+	 * @JsonIgnore private User user;
+	 */
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
@@ -49,16 +51,12 @@ public class Demande {
 	public Demande() {
 	}
 
-	/*public User getUser() {
-		return user;
-	}
+	/*
+	 * public User getUser() { return user; }
+	 * 
+	 * public void setUser(User user) { this.user = user; }
+	 */
 
-	public void setUser(User user) {
-		this.user = user;
-	}*/
-
-	
-	
 	public Date getDate() {
 		return date;
 	}
@@ -74,9 +72,5 @@ public class Demande {
 	public void setStatut(String statut) {
 		this.statut = statut;
 	}
-
-	
-
-	
 
 }

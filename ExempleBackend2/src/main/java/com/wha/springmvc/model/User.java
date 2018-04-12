@@ -27,10 +27,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	@OneToMany( fetch = FetchType.LAZY)
+	/*@OneToMany( fetch = FetchType.LAZY)
 	@JsonIgnore 
 	private List<Demande> demandes;
-	
+	*/
 	
     // un utilisateur est associé a une adresse ie nous devons avoir List<adresse>adresse
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
@@ -46,13 +46,13 @@ public class User {
 
 	@Column(name = "prenom")
 	private String prenom;
-
+	
 	@Column(name = "mdp")
 	private String mdp;
-
+	
 	@Column(name = "username")
 	private String username;
-
+	
 	private String email;
 	private String numTel;
 	private String sexe;
@@ -73,13 +73,7 @@ public class User {
 		this.numTel = numTel;
 	}
 
-	public List<Demande> getDemandes() {
-		return demandes;
-	}
-
-	public void setDemandes(List<Demande> demandes) {
-		this.demandes = demandes;
-	}
+	
 
 	public String getNom() {
 		return nom;
